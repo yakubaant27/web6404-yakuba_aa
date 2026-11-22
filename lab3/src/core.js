@@ -12,7 +12,7 @@ function isInteger(n) {
 function even() {
     const numbers = [];
 
-    for (let n = 2; n <= 20; n += 2)
+    for (let n = 2; n <= 20; n+=2)
     {
         numbers.push(n);
     }
@@ -54,6 +54,7 @@ function recSumTo(n) {
  */
 function factorial(n) {
     let result = 1;
+    if (n < 0) return undefined;
 
     for (let i = 1; i <= n; i++)
     {
