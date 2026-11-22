@@ -1,0 +1,364 @@
+/* Основные цвета сайта */
+:root {
+  --color-page-text: #edf0f7;
+  --color-page-background: #11131d;
+  --color-page-overlay-start: rgba(17, 19, 29, 0.76);
+  --color-page-overlay-end: rgba(17, 19, 29, 0.86);
+  --color-heading: #d3b8ff;
+  --color-white: #ffffff;
+  --color-header-background: #27223b;
+  --color-header-gradient: #49376b;
+  --color-header-text: #d9d2e8;
+  --color-surface: #1c1e2b;
+  --color-border: #39364a;
+  --color-link: #cbb2ff;
+  --color-card-surface: rgba(28, 30, 43, 0.94);
+  --color-card-border: #49445b;
+  --color-card-shadow: rgba(0, 0, 0, 0.35);
+  --color-image-border: #54476f;
+  --color-accent: #a987e8;
+  --color-muted-text: #c4c2ce;
+  --color-footer-background: #0b0c12;
+}
+
+/* Блок page (<body>) */
+.page {
+  margin: 0;
+  color: var(--color-page-text);
+  background-color: var(--color-page-background);
+  background-image:
+    linear-gradient(var(--color-page-overlay-start), var(--color-page-overlay-end)),
+    url("../images/cloud-rap.jpg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.7;
+}
+
+/* Блок container */
+.container {
+  width: min(100% - 32px, 1000px);
+  margin: 0 auto;
+}
+
+/* Блок header */
+.header {
+  padding: 42px 0;
+  color: var(--color-white);
+  background-color: var(--color-header-background);
+  background-image: linear-gradient(
+    120deg,
+    var(--color-header-background),
+    var(--color-header-gradient)
+  );
+}
+
+.header__title {
+  margin: 0 0 8px;
+  font-size: 2.5rem;
+  line-height: 1.2;
+}
+
+.header__subtitle {
+  margin: 0;
+  color: var(--color-header-text);
+}
+
+/* Блок nav */
+.nav {
+  padding: 12px 0;
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.nav__link {
+  display: inline-block;
+  margin-right: 20px;
+  color: var(--color-link);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav__link:hover {
+  color: var(--color-white);
+  text-decoration: underline;
+}
+
+/* Модификатор: ссылка на текущую страницу */
+.nav__link_active {
+  color: var(--color-white);
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-underline-offset: 6px;
+}
+
+/* Блок main (подмешивается к .container) */
+.main {
+  min-height: 60vh;
+  padding-top: 28px;
+  padding-bottom: 40px;
+}
+
+/* Блок section */
+.section {
+  margin-bottom: 32px;
+}
+
+.section__title {
+  color: var(--color-heading);
+  line-height: 1.2;
+}
+
+.section__image {
+  display: block;
+  width: 100%;
+  max-width: 760px;
+  height: auto;
+  border: 1px solid var(--color-image-border);
+  border-radius: 12px;
+}
+
+/* Модификатор: выделенный блок «Из чего складывается звучание» */
+.section_type_features {
+  padding: 18px 22px;
+  background-color: var(--color-surface);
+  border-left: 4px solid var(--color-accent);
+}
+
+/* Блок link (ссылка внутри текста) */
+.link {
+  color: var(--color-link);
+}
+
+.link:hover {
+  color: var(--color-white);
+}
+
+/* Блок columns: Flexbox для страницы истории */
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -12px;
+  margin-right: -12px;
+}
+
+.columns__item {
+  width: 50%;
+  padding: 0 12px;
+  margin-top: 24px;
+  margin-bottom: 32px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 760px) {
+  .columns__item {
+    width: 100%;
+  }
+}
+
+/* Блок gallery: Grid для галереи артистов */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Карточки фотографий */
+.gallery__item {
+  /* параметры анимации */
+  --appear-duration: 0.9s;
+  --appear-easing: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --col: 0;
+  --row: 0;
+  --delay: calc(var(--col) * 70ms + var(--row) * 110ms);
+
+  overflow: hidden;
+  margin: 0;
+  background-color: var(--color-card-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: 10px;
+  animation: gallery-item-appear var(--appear-duration) var(--appear-easing)
+    var(--delay) backwards;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+/* Каскад: волна слева направо, затем сверху вниз */
+.gallery__item:nth-child(4n + 2) { --col: 1; }
+.gallery__item:nth-child(4n + 3) { --col: 2; }
+.gallery__item:nth-child(4n)     { --col: 3; }
+.gallery__item:nth-child(n + 5)  { --row: 1; }
+.gallery__item:nth-child(n + 9)  { --row: 2; }
+.gallery__item:nth-child(n + 13) { --row: 3; }
+
+.gallery__item:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-accent);
+  box-shadow: 0 12px 24px var(--color-card-shadow);
+}
+
+/* CSS-анимация: карточка проявляется из тумана */
+@keyframes gallery-item-appear {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.96);
+    filter: blur(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+/* Фото внутри карточки «оседает» */
+@keyframes gallery-photo-settle {
+  from {
+    transform: scale(1.12);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+.gallery__photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background-color: var(--color-header-background);
+  animation: gallery-photo-settle 1.6s var(--appear-easing) var(--delay) backwards;
+}
+
+/* Уважаем настройку «уменьшить движение» */
+@media (prefers-reduced-motion: reduce) {
+  .gallery__item,
+  .gallery__photo {
+    animation: none;
+  }
+
+  .gallery__item:hover {
+    transform: none;
+  }
+}
+
+.gallery__caption {
+  padding: 10px 12px;
+  color: var(--color-page-text);
+  font-weight: bold;
+}
+
+/* Блок table: таблица альбомов */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--color-surface);
+}
+
+.table__cell {
+  padding: 12px;
+  border: 1px solid var(--color-card-border);
+}
+
+/* Модификатор: ячейка заголовка */
+.table__cell_type_head {
+  color: var(--color-white);
+  background-color: var(--color-header-gradient);
+}
+
+.table__cell:nth-child(1) {
+  text-align: left;
+}
+
+.table__cell:nth-child(2) {
+  text-align: center;
+}
+
+.table__cell:nth-child(3) {
+  text-align: right;
+}
+
+/* Блок feedback: секция страницы обратной связи */
+.feedback {
+  max-width: 544px;
+  margin: 0 auto 32px;
+}
+
+.feedback__title {
+  text-align: center;
+}
+
+/* Блок form: форма обратной связи */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 500px;
+  padding: 22px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Модификатор: поле с чекбоксом (в строку) — должен идти после .form__field */
+.form__field_type_checkbox {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.form__input {
+  padding: 10px;
+  color: var(--color-page-text);
+  background-color: var(--color-page-background);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+}
+
+.form__checkbox {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.form__button {
+  padding: 12px;
+  color: var(--color-white);
+  background-color: var(--color-header-gradient);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form__button:hover {
+  background-color: var(--color-accent);
+}
+
+/* Блок footer */
+.footer {
+  padding: 16px 0;
+  color: var(--color-muted-text);
+  background-color: var(--color-footer-background);
+  border-top: 1px solid var(--color-border);
+}

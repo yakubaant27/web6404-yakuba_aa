@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Обратная связь</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/form.js" defer></script>
+</head>
+<body class="page">
+  <header class="header">
+    <div class="container">
+      <h1 class="header__title">Поделитесь своими музыкальными предпочтениями</h1>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="container">
+      <a class="nav__link" href="index.html">Главная</a>
+      <a class="nav__link" href="history.html">История</a>
+      <a class="nav__link" href="artists.html">Артисты</a>
+      <a class="nav__link" href="albums.html">Альбомы</a>
+      <a class="nav__link nav__link_active" href="feedback.html" aria-current="page">Обратная связь</a>
+    </div>
+  </nav>
+
+  <main class="main container">
+    <section class="section feedback">
+      <h2 class="section__title feedback__title">Форма обратной связи</h2>
+
+      <form class="form">
+        <label class="form__field">
+          Ваше имя:
+          <input class="form__input" type="text" name="name" required>
+        </label>
+
+        <label class="form__field">
+          Электронная почта:
+          <input class="form__input" type="email" name="email" required>
+        </label>
+
+        <label class="form__field">
+          Любимый исполнитель:
+          <input class="form__input" type="text" name="artist" required>
+        </label>
+
+        <label class="form__field">
+          Как вы узнали о сайте:
+          <select class="form__input" name="source" required>
+            <option value="" disabled selected>Выберите вариант</option>
+            <option value="friend">От друга</option>
+            <option value="vk">Рекомендация в ВК</option>
+            <option value="telegram">Реклама в Telegram</option>
+            <option value="tiktok">TikTok-рекомендация</option>
+            <option value="soundcloud">SoundCloud-аккаунт нашего портала</option>
+            <option value="browser">Выдача браузера</option>
+            <option value="other">Другое</option>
+          </select>
+        </label>
+
+        <label class="form__field form__field_type_checkbox">
+          <input class="form__checkbox" type="checkbox" name="news">
+          <span>Хочу получать новости об артистах</span>
+        </label>
+
+        <button class="form__button" type="submit">Отправить</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container"></div>
+  </footer>
+</body>
+</html>
